@@ -1,9 +1,5 @@
 # Change Log
 
-All notable changes to the "better-call-tree" extension will be documented in this file.
+## [0.0.1]
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+- Enable multi-session call hierarchy tree view

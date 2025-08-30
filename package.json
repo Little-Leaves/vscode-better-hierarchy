@@ -1,23 +1,118 @@
 {
-  "name": "better-call-tree",
-  "displayName": "Better call tree",
-  "description": "",
+  "name": "better-hierarchy",
+  "displayName": "Better Hierarchy",
+  "publisher": "Little-Leaves",
+  "description": "Enable to use a multi-session call hierarchy view",
   "version": "0.0.1",
+  "repository": {
+    "url": "https://github.com/Little-Leaves/vscode-better-hierarchy"
+  },
+  "license": "MIT",
+  "icon": "icons/icon.png",
   "engines": {
-    "vscode": "^1.103.0"
+    "vscode": "^1.95.0"
   },
   "categories": [
-    "Other"
+    "Programming Languages"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "better-call-tree.helloWorld",
-        "title": "Hello World"
+        "command": "betterHierarchy.showHierarchy",
+        "title": "Show call hierarchy"
+      },
+      {
+        "command": "betterHierarchy.RefreshSession",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "betterHierarchy.RefreshAllSessions",
+        "title": "Refresh all",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "betterHierarchy.CloseSession",
+        "title": "Close",
+        "icon": "$(close)"
+      },
+      {
+        "command": "betterHierarchy.CloseAllSessions",
+        "title": "Close all",
+        "icon": "$(close)"
+      },
+      {
+        "command": "betterHierarchy.FixSession",
+        "title": "Fix session",
+        "icon": {
+          "light": "icons/nail_light.svg",
+          "dark": "icons/nail_dark.svg"
+        }
+      },
+      {
+        "command": "betterHierarchy.CancelFixSession",
+        "title": "Cancel fix",
+        "icon": {
+          "light": "icons/nail_light_enable.svg",
+          "dark": "icons/nail_dark_enable.svg"
+        }
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "betterHierarchy.showHierarchy",
+          "group": "0_worksapce",
+          "when": "editorHasCallHierarchyProvider"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "betterHierarchy.RefreshSession",
+          "when": "viewItem == HierarchyTreeRoot || viewItem == HierarchyTreeRootFixed",
+          "group": "inline@1"
+        },
+        {
+          "command": "betterHierarchy.FixSession",
+          "when": "viewItem == HierarchyTreeRoot",
+          "group": "inline@2"
+        },
+        {
+          "command": "betterHierarchy.CancelFixSession",
+          "when": "viewItem == HierarchyTreeRootFixed",
+          "group": "inline@2"
+        },
+        {
+          "command": "betterHierarchy.CloseSession",
+          "when": "viewItem == HierarchyTreeRoot || viewItem == HierarchyTreeRootFixed",
+          "group": "inline@3"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "betterHierarchy.RefreshAllSessions",
+          "when": "view === betterHierarchyCalls",
+          "group": "navigation@1"
+        },
+        {
+          "command": "betterHierarchy.CloseAllSessions",
+          "when": "view === betterHierarchyCalls",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "views": {
+      "references-view": [
+        {
+          "icon": "",
+          "id": "betterHierarchyCalls",
+          "name": "Hierarchy",
+          "type": "tree"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
@@ -28,7 +123,7 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.103.0",
+    "@types/vscode": "^1.95.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
