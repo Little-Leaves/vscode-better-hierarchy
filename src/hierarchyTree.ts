@@ -122,14 +122,7 @@ class HierarchyTreeRoot extends HierarchyTreeItem {
         public override collapsibleState: vscode.TreeItemCollapsibleState,
         callItem: vscode.CallHierarchyItem,
     ) {
-        super(label, collapsibleState, { from: callItem, fromRanges: [] }, null!);
-        vscode.workspace.openTextDocument(callItem.uri).then(document => {
-            const name = callItem.name.split("::").pop() as string;
-            const nameOffset = document.getText(callItem.range).indexOf(name);
-            const start = document.positionAt(document.offsetAt(callItem.range.start) + nameOffset);
-            const end: vscode.Position = new vscode.Position(start.line, start.character + name.length);
-            this.callItem.fromRanges.push(new vscode.Range(start, end));
-        });
+        super(label, collapsibleState, { from: callItem, fromRanges: [callItem.selectionRange] }, null!);
         this.setFixed(false);
         this.root = this;
     }
@@ -234,7 +227,7 @@ export class HierarchyTreeDataProvider implements vscode.TreeDataProvider<Hierar
         return element.childs;
     }
 
-    async handleNewHierarchyTree(treeView: vscode.TreeView<HierarchyTreeDataProvider>) {
+    async handleNewHierarchyTree() {
         let editor = vscode.window.activeTextEditor;
         let position = editor?.selection.active;
         if (position) {
@@ -263,6 +256,9 @@ export class HierarchyTreeDataProvider implements vscode.TreeDataProvider<Hierar
                 this.sessions.push(newSession);
                 this._onDidChangeTreeData.fire(undefined);
                 this.treeView?.reveal(newSession);
+            }
+            else {
+                vscode.window.showInformationMessage("No results or Lauguage server not registered");
             }
         }
     }
