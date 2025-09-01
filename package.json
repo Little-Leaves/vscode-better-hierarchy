@@ -3,7 +3,7 @@
   "displayName": "Better Hierarchy",
   "publisher": "Little-Leaves",
   "description": "Enable to use a multi-session call hierarchy view",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "url": "https://github.com/Little-Leaves/vscode-better-hierarchy"
   },
