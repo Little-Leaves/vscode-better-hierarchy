@@ -185,7 +185,6 @@ export class HierarchyTreeDataProvider implements vscode.TreeDataProvider<Hierar
     private _onDidChangeTreeData = new vscode.EventEmitter<HierarchyTreeItem | undefined>();
     onDidChangeTreeData = this._onDidChangeTreeData.event;
     private sessions: HierarchyTreeRoot[] = [];
-    private lastEditor?: vscode.TextEditor;
     treeView?: vscode.TreeView<HierarchyTreeItem>;
 
     // 跳转时使用文本装饰器高亮
@@ -298,19 +297,9 @@ export class HierarchyTreeDataProvider implements vscode.TreeDataProvider<Hierar
         throw new Error('Method not implemented.');
     }
 
-    async getEditor(uri: vscode.Uri) {
-        if (this.lastEditor && this.lastEditor.document.uri.fsPath === uri.fsPath) {
-            return this.lastEditor;
-        }
-        else {
-            const document = await vscode.workspace.openTextDocument(uri);
-            this.lastEditor = await vscode.window.showTextDocument(document);
-            return this.lastEditor;
-        }
-    }
-
     async handleGotoCallItemPosition(callItem: vscode.CallHierarchyIncomingCall) {
-        const editor = await this.getEditor(callItem.from.uri);
+        const document = await vscode.workspace.openTextDocument(callItem.from.uri);
+        const editor =  await vscode.window.showTextDocument(document);
         editor.revealRange(callItem.fromRanges[0], vscode.TextEditorRevealType.InCenterIfOutsideViewport);
         editor.setDecorations(HierarchyTreeDataProvider.hoverLikeDecorationType, callItem.fromRanges);
         editor.selection = new vscode.Selection(callItem.fromRanges[0].start, callItem.fromRanges[0].start);
