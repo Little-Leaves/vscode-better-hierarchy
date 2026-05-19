@@ -40,66 +40,66 @@ class HierarchyTreeItem extends vscode.TreeItem {
     }
 
     setIcon() {
-        this.iconPath = new vscode.ThemeIcon(this.getIconForSymbolKind(this.callItem.from.kind));
+        this.iconPath = this.getIconForSymbolKind(this.callItem.from.kind);
     }
 
-    getIconForSymbolKind(kind: vscode.SymbolKind): string {
+    getIconForSymbolKind(kind: vscode.SymbolKind): vscode.ThemeIcon {
         switch (kind) {
             case vscode.SymbolKind.File:
-                return 'symbol-file';
+                return new vscode.ThemeIcon("symbol-file", new vscode.ThemeColor("symbolIcon.fileForeground"));
             case vscode.SymbolKind.Module:
-                return 'symbol-module';
+                return new vscode.ThemeIcon("symbol-module",  new vscode.ThemeColor("symbolIcon.moduleForeground"));
             case vscode.SymbolKind.Namespace:
-                return 'symbol-namespace';
+                return new vscode.ThemeIcon("symbol-namespace",  new vscode.ThemeColor("symbolIcon.namespaceForeground"));
             case vscode.SymbolKind.Package:
-                return 'symbol-package';
+                return new vscode.ThemeIcon("symbol-package",  new vscode.ThemeColor("symbolIcon.packageForeground"));
             case vscode.SymbolKind.Class:
-                return 'symbol-class';
+                return new vscode.ThemeIcon("symbol-class",  new vscode.ThemeColor("symbolIcon.classForeground"));
             case vscode.SymbolKind.Method:
-                return 'symbol-method';
+                return new vscode.ThemeIcon("symbol-method",  new vscode.ThemeColor("symbolIcon.methodForeground"));
             case vscode.SymbolKind.Property:
-                return 'symbol-property';
+                return new vscode.ThemeIcon("symbol-property",  new vscode.ThemeColor("symbolIcon.propertyForeground"));
             case vscode.SymbolKind.Field:
-                return 'symbol-field';
+                return new vscode.ThemeIcon("symbol-field",  new vscode.ThemeColor("symbolIcon.fieldForeground"));
             case vscode.SymbolKind.Constructor:
-                return 'symbol-constructor';
+                return new vscode.ThemeIcon("symbol-constructor",  new vscode.ThemeColor("symbolIcon.constructorForeground"));
             case vscode.SymbolKind.Enum:
-                return 'symbol-enum';
+                return new vscode.ThemeIcon("symbol-enum",  new vscode.ThemeColor("symbolIcon.enumForeground"));
             case vscode.SymbolKind.Interface:
-                return 'symbol-interface';
+                return new vscode.ThemeIcon("symbol-interface",  new vscode.ThemeColor("symbolIcon.interfaceForeground"));
             case vscode.SymbolKind.Function:
-                return 'symbol-function';
+                return new vscode.ThemeIcon("symbol-function",  new vscode.ThemeColor("symbolIcon.functionForeground"));
             case vscode.SymbolKind.Variable:
-                return 'symbol-variable';
+                return new vscode.ThemeIcon("symbol-variable",  new vscode.ThemeColor("symbolIcon.variableForeground"));
             case vscode.SymbolKind.Constant:
-                return 'symbol-constant';
+                return new vscode.ThemeIcon("symbol-constant",  new vscode.ThemeColor("symbolIcon.constantForeground"));
             case vscode.SymbolKind.String:
-                return 'symbol-string';
+                return new vscode.ThemeIcon("symbol-string",  new vscode.ThemeColor("symbolIcon.stringForeground"));
             case vscode.SymbolKind.Number:
-                return 'symbol-number';
+                return new vscode.ThemeIcon("symbol-number",  new vscode.ThemeColor("symbolIcon.numberForeground"));
             case vscode.SymbolKind.Boolean:
-                return 'symbol-boolean';
+                return new vscode.ThemeIcon("symbol-boolean",  new vscode.ThemeColor("symbolIcon.booleanForeground"));
             case vscode.SymbolKind.Array:
-                return 'symbol-array';
+                return new vscode.ThemeIcon("symbol-array",  new vscode.ThemeColor("symbolIcon.arrayForeground"));
             case vscode.SymbolKind.Object:
-                return 'symbol-object';
+                return new vscode.ThemeIcon("symbol-object",  new vscode.ThemeColor("symbolIcon.objectForeground"));
             case vscode.SymbolKind.Key:
-                return 'symbol-key';
+                return new vscode.ThemeIcon("symbol-key",  new vscode.ThemeColor("symbolIcon.keyForeground"));
             case vscode.SymbolKind.Null:
-                return 'symbol-null';
+                return new vscode.ThemeIcon("symbol-null",  new vscode.ThemeColor("symbolIcon.nullForeground"));
             case vscode.SymbolKind.EnumMember:
-                return 'symbol-enum-member';
+                return new vscode.ThemeIcon("symbol-enum-member",  new vscode.ThemeColor("symbolIcon.enumeratorMemberForeground"));
             case vscode.SymbolKind.Struct:
-                return 'symbol-struct';
+                return new vscode.ThemeIcon("symbol-struct",  new vscode.ThemeColor("symbolIcon.structForeground"));
             case vscode.SymbolKind.Event:
-                return 'symbol-event';
+                return new vscode.ThemeIcon("symbol-event",  new vscode.ThemeColor("symbolIcon.eventForeground"));
             case vscode.SymbolKind.Operator:
-                return 'symbol-operator';
+                return new vscode.ThemeIcon("symbol-operator",  new vscode.ThemeColor("symbolIcon.operatorForeground"));
             case vscode.SymbolKind.TypeParameter:
-                return 'symbol-type-parameter';
+                return new vscode.ThemeIcon("symbol-type-parameter", new vscode.ThemeColor("symbolIcon.typeParameterForeground"));
             default:
                 // 对于未知的类型，返回一个通用的符号图标
-                return 'symbol-misc';
+                return new vscode.ThemeIcon("symbol-misc");
         }
     }
 }
